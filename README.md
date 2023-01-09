@@ -5,7 +5,7 @@ ASP.NET Core Application with RESTful HTTP services.
 # Getting Started
 To get started with this project, follow these steps:
 
-1) Clone or download the repository to your local machine.<br>
+1) Clone or download the repository in your local machine.<br>
 ```cmd
   git clone https://github.com/notwld/dotnet-core-testing
 ```
