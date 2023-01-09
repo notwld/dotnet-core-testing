@@ -18,3 +18,14 @@ C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\obj\Debug\netcoreapp3.1
 C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\obj\Debug\netcoreapp3.1\API-Testing.dll
 C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\obj\Debug\netcoreapp3.1\API-Testing.pdb
 C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\obj\Debug\netcoreapp3.1\API-Testing.genruntimeconfig.cache
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\20b-115-se\source\repos\API-Testing\API-Testing\obj\Debug\netcoreapp3.1\API-Testing.csproj.CopyComplete
