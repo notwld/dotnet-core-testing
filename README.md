@@ -9,7 +9,7 @@ To get started with this project, follow these steps:
 ```cmd
   git clone https://github.com/notwld/dotnet-core-testing
 ```
-2) Run `database_init.sql` and `stored_procedure.sql` scripts in SQLServer.
+2) Run `database_init.sql` script in SQLServer.
 3) Open the solution file in Visual Studio.<br>
 4) Change the connection string in `Connection.cs`
 ```cmd
