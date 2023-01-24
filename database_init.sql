@@ -1,13 +1,12 @@
 USE [master]
 GO
-/****** Object:  Database [InstituteAttendenceSystem]    Script Date: 1/21/2023 11:31:04 PM ******/
+/****** Object:  Database [InstituteAttendenceSystem]    Script Date: 1/24/2023 5:15:28 PM ******/
 CREATE DATABASE [InstituteAttendenceSystem]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'InstituteAttendenceSystem', FILENAME = N'D:\sqlserver\MSSQL16.MSSQLSERVER\MSSQL\DATA\InstituteAttendenceSystem.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+( NAME = N'InstituteAttendenceSystem', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL13.SQLEXPRESS\MSSQL\DATA\InstituteAttendenceSystem.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
  LOG ON 
-( NAME = N'InstituteAttendenceSystem_log', FILENAME = N'D:\sqlserver\MSSQL16.MSSQLSERVER\MSSQL\DATA\InstituteAttendenceSystem_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
- WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+( NAME = N'InstituteAttendenceSystem_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL13.SQLEXPRESS\MSSQL\DATA\InstituteAttendenceSystem_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
 GO
 ALTER DATABASE [InstituteAttendenceSystem] SET COMPATIBILITY_LEVEL = 130
 GO
@@ -74,86 +73,119 @@ ALTER DATABASE [InstituteAttendenceSystem] SET TARGET_RECOVERY_TIME = 60 SECONDS
 GO
 ALTER DATABASE [InstituteAttendenceSystem] SET DELAYED_DURABILITY = DISABLED 
 GO
-ALTER DATABASE [InstituteAttendenceSystem] SET ACCELERATED_DATABASE_RECOVERY = OFF  
-GO
-EXEC sys.sp_db_vardecimal_storage_format N'InstituteAttendenceSystem', N'ON'
-GO
 ALTER DATABASE [InstituteAttendenceSystem] SET QUERY_STORE = OFF
 GO
 USE [InstituteAttendenceSystem]
 GO
-/****** Object:  Table [dbo].[tbl_Course]    Script Date: 1/21/2023 11:31:04 PM ******/
+ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = OFF;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 0;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SNIFFING = ON;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
+GO
+USE [InstituteAttendenceSystem]
+GO
+/****** Object:  Table [dbo].[tbl_Course]    Script Date: 1/24/2023 5:15:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tbl_Course](
 	[CourseId] [int] IDENTITY(1,1) NOT NULL,
-	[CourseCode] [nvarchar](50) NOT NULL,
-	[CourseName] [nvarchar](50) NOT NULL,
-	[CourseShortName] [nvarchar](50) NULL,
- CONSTRAINT [PK_tbl_course] PRIMARY KEY CLUSTERED 
+	[CourseCode] [varchar](50) NOT NULL,
+	[CourseName] [varchar](50) NOT NULL,
+	[CourseShortName] [varchar](50) NULL,
+ CONSTRAINT [PK_tbl_Course] PRIMARY KEY CLUSTERED 
 (
 	[CourseId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tbl_TimeSlot]    Script Date: 1/21/2023 11:31:04 PM ******/
+/****** Object:  Table [dbo].[tbl_Room]    Script Date: 1/24/2023 5:15:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_Room](
+	[RoomId] [int] IDENTITY(1,1) NOT NULL,
+	[RoomName] [varchar](50) NOT NULL,
+	[RoomDescription] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_tbl_Room] PRIMARY KEY CLUSTERED 
+(
+	[RoomId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tbl_TimeSlot]    Script Date: 1/24/2023 5:15:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tbl_TimeSlot](
 	[TSId] [int] IDENTITY(1,1) NOT NULL,
-	[TSCode] [varchar](10) NULL,
+	[TSCode] [nchar](10) NULL,
 	[StartTime] [time](7) NULL,
 	[EndTime] [time](7) NULL,
+	[RoomId] [int] NULL,
 	[Status] [int] NULL,
  CONSTRAINT [PK_tbl_TimeSlot] PRIMARY KEY CLUSTERED 
 (
 	[TSId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 SET IDENTITY_INSERT [dbo].[tbl_Course] ON 
 GO
-INSERT [dbo].[tbl_Course] ([CourseId], [CourseCode], [CourseName], [CourseShortName]) VALUES (1006, N'E1001', N'Interactive Design and Multimedia', N'IDAM')
+INSERT [dbo].[tbl_Course] ([CourseId], [CourseCode], [CourseName], [CourseShortName]) VALUES (2, N'M1001', N'Desktop Web & Mobile Application', N'DWMAD')
 GO
-INSERT [dbo].[tbl_Course] ([CourseId], [CourseCode], [CourseName], [CourseShortName]) VALUES (1008, N'CS1002', N'Digital Media & Enterpreneurship', N'DME')
-GO
-INSERT [dbo].[tbl_Course] ([CourseId], [CourseCode], [CourseName], [CourseShortName]) VALUES (3001, N'CS222', N'Data Communication & Computer Networks', N'DCCN')
-GO
-INSERT [dbo].[tbl_Course] ([CourseId], [CourseCode], [CourseName], [CourseShortName]) VALUES (4002, N'SE319', N'Web Engineering', N'WE')
-GO
-INSERT [dbo].[tbl_Course] ([CourseId], [CourseCode], [CourseName], [CourseShortName]) VALUES (4003, N'SE212', N'Intro to Software Engineering ', N'ISE')
+INSERT [dbo].[tbl_Course] ([CourseId], [CourseCode], [CourseName], [CourseShortName]) VALUES (3, N'E1002', N'Digital Media & Enterpreneurship', N'DME')
 GO
 SET IDENTITY_INSERT [dbo].[tbl_Course] OFF
 GO
+SET IDENTITY_INSERT [dbo].[tbl_Room] ON 
+GO
+INSERT [dbo].[tbl_Room] ([RoomId], [RoomName], [RoomDescription]) VALUES (1, N'R203', N'very cool room ngl')
+GO
+INSERT [dbo].[tbl_Room] ([RoomId], [RoomName], [RoomDescription]) VALUES (2, N'R204', N'nice cool room')
+GO
+INSERT [dbo].[tbl_Room] ([RoomId], [RoomName], [RoomDescription]) VALUES (3, N'R103', N'boring')
+GO
+SET IDENTITY_INSERT [dbo].[tbl_Room] OFF
+GO
 SET IDENTITY_INSERT [dbo].[tbl_TimeSlot] ON 
 GO
-INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [Status]) VALUES (1, N'M001', CAST(N'19:00:00' AS Time), CAST(N'21:30:00' AS Time), 1)
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (1, N'M001      ', CAST(N'19:00:00' AS Time), CAST(N'21:30:00' AS Time), NULL, 1)
 GO
-INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [Status]) VALUES (2, N'E001', CAST(N'11:00:00' AS Time), CAST(N'16:00:00' AS Time), 1)
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (2, N'E001      ', CAST(N'11:00:00' AS Time), CAST(N'16:00:00' AS Time), NULL, 1)
 GO
-INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [Status]) VALUES (3, N'E002', CAST(N'10:00:00' AS Time), CAST(N'15:00:00' AS Time), 0)
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (3, N'E002      ', CAST(N'10:00:00' AS Time), CAST(N'15:00:00' AS Time), NULL, 0)
 GO
-INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [Status]) VALUES (1002, N'E104', CAST(N'17:00:00' AS Time), CAST(N'19:30:00' AS Time), 1)
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (1002, N'E104      ', CAST(N'17:00:00' AS Time), CAST(N'19:30:00' AS Time), NULL, 1)
 GO
-INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [Status]) VALUES (1003, N'E105', CAST(N'17:30:00' AS Time), CAST(N'20:00:00' AS Time), 1)
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (1003, N'E105      ', CAST(N'17:30:00' AS Time), CAST(N'20:00:00' AS Time), NULL, 1)
 GO
-INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [Status]) VALUES (1004, N'E106', CAST(N'17:30:00' AS Time), CAST(N'19:30:00' AS Time), 1)
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (1004, N'E106      ', CAST(N'17:30:00' AS Time), CAST(N'19:30:00' AS Time), NULL, 1)
 GO
-INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [Status]) VALUES (1005, N'E106', CAST(N'17:00:00' AS Time), CAST(N'20:00:00' AS Time), 1)
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (1005, N'E106      ', CAST(N'17:00:00' AS Time), CAST(N'20:00:00' AS Time), NULL, 1)
 GO
-INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [Status]) VALUES (1006, N'E1050', CAST(N'02:00:00' AS Time), CAST(N'05:00:00' AS Time), 0)
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (1006, N'E1050     ', CAST(N'02:00:00' AS Time), CAST(N'05:00:00' AS Time), NULL, 0)
 GO
-INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [Status]) VALUES (1007, N'X02', CAST(N'05:00:00' AS Time), CAST(N'07:00:00' AS Time), 1)
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (1007, N'X02       ', CAST(N'05:00:00' AS Time), CAST(N'07:00:00' AS Time), NULL, 1)
 GO
-INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [Status]) VALUES (1008, N'X005', CAST(N'11:00:00' AS Time), CAST(N'13:00:00' AS Time), 0)
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (1008, N'X005      ', CAST(N'11:00:00' AS Time), CAST(N'13:00:00' AS Time), NULL, 0)
+GO
+INSERT [dbo].[tbl_TimeSlot] ([TSId], [TSCode], [StartTime], [EndTime], [RoomId], [Status]) VALUES (1009, N'X101      ', CAST(N'10:00:00' AS Time), CAST(N'01:00:00' AS Time), 1, 1)
 GO
 SET IDENTITY_INSERT [dbo].[tbl_TimeSlot] OFF
 GO
-/****** Object:  StoredProcedure [dbo].[Course_Delete]    Script Date: 1/21/2023 11:31:05 PM ******/
+ALTER TABLE [dbo].[tbl_Room]  WITH CHECK ADD  CONSTRAINT [FK_tbl_Room_tbl_Room] FOREIGN KEY([RoomId])
+REFERENCES [dbo].[tbl_Room] ([RoomId])
+GO
+ALTER TABLE [dbo].[tbl_Room] CHECK CONSTRAINT [FK_tbl_Room_tbl_Room]
+GO
+/****** Object:  StoredProcedure [dbo].[Course_Delete]    Script Date: 1/24/2023 5:15:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -163,11 +195,11 @@ CREATE PROCEDURE [dbo].[Course_Delete]
 
 AS
 BEGIN
-	DELETE FROM tbl_course
+	DELETE FROM tbl_Course
 	WHERE CourseId = @CourseId
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[Course_Edit]    Script Date: 1/21/2023 11:31:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[Course_Edit]    Script Date: 1/24/2023 5:15:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -180,13 +212,13 @@ CREATE PROCEDURE [dbo].[Course_Edit]
 
 AS
 BEGIN
-    UPDATE tbl_course
+    UPDATE tbl_Course
     SET CourseCode = @CourseCode, CourseName = @CourseName, CourseShortName = @CourseShortName
     WHERE CourseId = @CourseId
 END;
 
 GO
-/****** Object:  StoredProcedure [dbo].[Course_GetAll]    Script Date: 1/21/2023 11:31:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[Course_GetAll]    Script Date: 1/24/2023 5:15:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -195,11 +227,11 @@ GO
 create procedure [dbo].[Course_GetAll]
 AS
 BEGIN 
-	SELECT * FROM tbl_course
+	SELECT * FROM tbl_Course
 END;
 
 GO
-/****** Object:  StoredProcedure [dbo].[Course_Save]    Script Date: 1/21/2023 11:31:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[Course_Save]    Script Date: 1/24/2023 5:15:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -211,12 +243,12 @@ CREATE PROCEDURE [dbo].[Course_Save]
 
 AS
 	BEGIN
-	INSERT INTO tbl_course
+	INSERT INTO tbl_Course
 	VALUES (@ParamTable1,@ParamTable2,@ParamTable3)
 END;
 
 GO
-/****** Object:  StoredProcedure [dbo].[TimeSlot_Delete]    Script Date: 1/21/2023 11:31:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[TimeSlot_Delete]    Script Date: 1/24/2023 5:15:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -231,9 +263,8 @@ BEGIN
 	WHERE TSId =  @TimeSlotId
 END;
 
-
 GO
-/****** Object:  StoredProcedure [dbo].[TimeSlot_Edit]    Script Date: 1/21/2023 11:31:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[TimeSlot_Edit]    Script Date: 1/24/2023 5:15:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -251,9 +282,8 @@ BEGIN
     SET TSCode = @TSCode, StartTime = @StartTime, EndTime = @EndTime,Status=@Status
     WHERE TSId = @TimeSlotId
 END;
-
 GO
-/****** Object:  StoredProcedure [dbo].[TimeSlot_GetAll]    Script Date: 1/21/2023 11:31:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[TimeSlot_GetAll]    Script Date: 1/24/2023 5:15:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -264,9 +294,8 @@ AS
 BEGIN 
 	SELECT * FROM tbl_TimeSlot
 END;
-
 GO
-/****** Object:  StoredProcedure [dbo].[TimeSlot_Save]    Script Date: 1/21/2023 11:31:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[TimeSlot_Save]    Script Date: 1/24/2023 5:15:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -283,7 +312,6 @@ AS
 	INSERT INTO tbl_TimeSlot
 	VALUES (@ParamTable1,@ParamTable2,@ParamTable3,@ParamTable4)
 END;
-
 GO
 USE [master]
 GO
