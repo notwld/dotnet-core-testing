@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace API_Testing.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"SELECT  *   FROM    tbl_TimeSlot WHERE Status = 1 ORDER BY 1 DESC";
+            string query = @"SELECT  *   FROM    tbl_TimeSlot INNER JOIN  tbl_Room ON tbl_TimeSlot.RoomId=tbl_Room.RoomId WHERE Status = 1 ORDER BY 1 DESC";
             DataTable dt = new DataTable();
             SqlDataReader sqlDataReader;
             using (SqlConnection myCon = new SqlConnection(_configuration.GetConnectionString("AttendanceAppCon")))
@@ -44,7 +44,7 @@ namespace API_Testing.Controllers
         [HttpPost]
         public JsonResult Post(TimeSlot timeSlot)
         {
-            string query = @"INSERT INTO tbl_TimeSlot VALUES(@TSCode, @StartTime, @EndTime, 1)";
+            string query = @"INSERT INTO tbl_TimeSlot VALUES(@TSCode, @StartTime, @EndTime,@RoomId, 1)";
             DataTable dt = new DataTable();
             SqlDataReader sqlDataReader;
             using (SqlConnection myCon = new SqlConnection(_configuration.GetConnectionString("AttendanceAppCon")))
@@ -55,6 +55,7 @@ namespace API_Testing.Controllers
                     sc.Parameters.AddWithValue("@TSCode", timeSlot.TSCode);
                     sc.Parameters.AddWithValue("@StartTime", timeSlot.StartTime);
                     sc.Parameters.AddWithValue("@EndTime", timeSlot.EndTime);
+                    sc.Parameters.AddWithValue("@RoomId", timeSlot.RoomId);
                     sqlDataReader = sc.ExecuteReader();
                     dt.Load(sqlDataReader);
                     sqlDataReader.Close();
